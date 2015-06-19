@@ -21,7 +21,7 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     </android.support.design.widget.AppBarLayout>
-    <com.moose.circlemenu.circlemenu.CircleMenu
+    <com.moose.circularmenu.CircleMenu
         android:id="@+id/circle_menu"
         android:layout_below="@id/appbar"
         android:layout_width="match_parent"
