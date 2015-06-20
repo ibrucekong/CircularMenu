@@ -16,8 +16,13 @@ In this sample,the custom view was just extends View(Not Viewgroup&FrameLayout)
 ####Renderings
 ![demo](http://i1.tietuku.com/d315b5ea062a7d42.gif)
 
+####About Overdraw
+You can test the performance of this custom view overdraw in CPU mode.
 
-License
+![overdraw](http://i1.tietuku.com/04e0b37196a0caf8.jpg)
+
+
+####License
     
 	
 	    Licensed under the Apache License, Version 2.0 (the "License");

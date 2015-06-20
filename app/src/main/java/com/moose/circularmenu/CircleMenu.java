@@ -47,6 +47,7 @@ public class CircleMenu extends View {
     }
 
     private MenuCallBack callBack;
+    private PaintFlagsDrawFilter mPaintFlagsDrawFilter;
     /**
      * Screen width
      */
@@ -108,16 +109,18 @@ public class CircleMenu extends View {
         paintLogo.setColor(R.color.white);
         paintLogo.setStyle(Paint.Style.STROKE);
 
-        bitmapLogo = BitmapFactory.decodeResource(getResources(), R.mipmap.account_small);
+        mPaintFlagsDrawFilter = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
+
+        bitmapLogo = BitmapFactory.decodeResource(getResources(), R.drawable.account_small);
         RADIU = getBitmapWidth(bitmapLogo) * 3 / 4;
-        bitmap1 = BitmapFactory.decodeResource(getResources(), R.mipmap.circle_account);
-        bitmap2 = BitmapFactory.decodeResource(getResources(), R.mipmap.circle_appinfo);
-        bitmap3 = BitmapFactory.decodeResource(getResources(), R.mipmap.circle_kefu);
-        bitmap4 = BitmapFactory.decodeResource(getResources(), R.mipmap.circle_my_order);
-        bitmap5 = BitmapFactory.decodeResource(getResources(), R.mipmap.circle_neworder);
-        bitmap6 = BitmapFactory.decodeResource(getResources(), R.mipmap.circle_send_order);
-        bitmap7 = BitmapFactory.decodeResource(getResources(), R.mipmap.circle_set);
-        bitmap8 = BitmapFactory.decodeResource(getResources(), R.mipmap.circle_wait_order);
+        bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.circle_account);
+        bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.circle_appinfo);
+        bitmap3 = BitmapFactory.decodeResource(getResources(), R.drawable.circle_kefu);
+        bitmap4 = BitmapFactory.decodeResource(getResources(), R.drawable.circle_my_order);
+        bitmap5 = BitmapFactory.decodeResource(getResources(), R.drawable.circle_neworder);
+        bitmap6 = BitmapFactory.decodeResource(getResources(), R.drawable.circle_send_order);
+        bitmap7 = BitmapFactory.decodeResource(getResources(), R.drawable.circle_set);
+        bitmap8 = BitmapFactory.decodeResource(getResources(), R.drawable.circle_wait_order);
         circlePoint = new Circle(bitmapLogo.getWidth() / 2 - getBitmapWidth(bitmapLogo) / 4, (display_h - dp2px(TOOLBAR_H)) / 2);
     }
 
@@ -125,7 +128,7 @@ public class CircleMenu extends View {
     @Override
     protected synchronized void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+        canvas.setDrawFilter(mPaintFlagsDrawFilter);
         canvas.drawBitmap(bitmapLogo, circlePoint.getX() - bitmapLogo.getWidth() / 2, circlePoint.getY() - bitmapLogo.getHeight() / 2, paintLogo);
         /**Moving axes*/
         canvas.translate(circlePoint.getX(), circlePoint.getY());
@@ -332,7 +335,7 @@ public class CircleMenu extends View {
         recoveryOffsetHistory(ss.progress);
     }
 
-    public static interface MenuCallBack {
+    public interface MenuCallBack {
         void clickMenu(Menu menu);
     }
 
