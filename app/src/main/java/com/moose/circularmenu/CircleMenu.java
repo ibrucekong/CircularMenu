@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PaintFlagsDrawFilter;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -124,6 +125,7 @@ public class CircleMenu extends View {
     @Override
     protected synchronized void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         canvas.drawBitmap(bitmapLogo, circlePoint.getX() - bitmapLogo.getWidth() / 2, circlePoint.getY() - bitmapLogo.getHeight() / 2, paintLogo);
         /**Moving axes*/
         canvas.translate(circlePoint.getX(), circlePoint.getY());
@@ -135,6 +137,7 @@ public class CircleMenu extends View {
         for (int i = 0; i < 8; i++) {
             canvas.save();
             canvas.rotate(SITE_ANGLES[i] + offsetinDraw);
+            canvas.clipRect(RADIU - getBitmapWidth(menuSet[i]) / 2 - 2, 0 - getBitmapHeight(menuSet[i]) / 2 - 2, RADIU + getBitmapWidth(menuSet[i]) / 2 + 2, getBitmapHeight(menuSet[i]) / 2 + 2);
             canvas.drawBitmap(menuSet[i], RADIU - getBitmapWidth(menuSet[i]) / 2, 0 - getBitmapHeight(menuSet[i]) / 2, paintLogo);
             canvas.restore();
         }
@@ -276,7 +279,7 @@ public class CircleMenu extends View {
      */
     private boolean isMenuTouched(int ix, int iy, Bitmap b, int siteOffset) {
         int angle = getOffsetHistory() + siteOffset;
-        double x0 = RADIU * Math.cos(Math.toRadians(angle)) + circlePoint.getX();//转换圆心坐标
+        double x0 = RADIU * Math.cos(Math.toRadians(angle)) + circlePoint.getX();
         double y0 = RADIU * Math.sin(Math.toRadians(angle)) + circlePoint.getY();
         return ((x0 - ix) * (x0 - ix) + (y0 - iy) * (y0 - iy)) <= getMinCircleRadius(b) * getMinCircleRadius(b);
     }
