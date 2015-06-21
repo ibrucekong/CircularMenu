@@ -17,7 +17,7 @@ In this sample,the custom view was just extends View(Not Viewgroup&FrameLayout)
 ![demo](http://i1.tietuku.com/d315b5ea062a7d42.gif)
 
 ####About Overdraw
-You can test the performance of this custom view overdraw in CPU mode.
+You can test the performance of this custom view in overdraw-CPU mode.
 
 ![overdraw](http://i1.tietuku.com/04e0b37196a0caf8.jpg)
 
